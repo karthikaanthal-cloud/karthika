@@ -1,0 +1,192 @@
+
+<style>
+:root { --week-gap: 16px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.roadmap { padding: 1.5rem 0; }
+.header-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 2rem; }
+.stat { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; text-align: center; }
+.stat-num { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.stat-label { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+.week-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab { padding: 6px 16px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); font-size: 13px; cursor: pointer; background: var(--color-background-primary); color: var(--color-text-secondary); transition: all 0.15s; }
+.tab.active { background: #1D9E75; border-color: #1D9E75; color: #fff; }
+.tab:hover:not(.active) { background: var(--color-background-secondary); }
+.week-panel { display: none; }
+.week-panel.active { display: block; }
+.milestone-bar { border-left: 3px solid #1D9E75; padding: 10px 14px; margin-bottom: 1.5rem; background: #E1F5EE; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; }
+.milestone-label { font-size: 11px; color: #0F6E56; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+.milestone-text { font-size: 15px; color: #085041; font-weight: 500; margin-top: 2px; }
+.section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+.days-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; margin-bottom: 1.5rem; }
+.day-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 12px; }
+.day-num { font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 4px; }
+.day-topic { font-size: 13px; color: var(--color-text-primary); font-weight: 500; line-height: 1.4; }
+.day-task { font-size: 12px; color: var(--color-text-secondary); margin-top: 3px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+.resource-list, .project-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 14px; }
+.resource-item { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; color: var(--color-text-primary); }
+.resource-item:last-child { border-bottom: none; }
+.resource-item i { color: #1D9E75; font-size: 15px; margin-top: 1px; flex-shrink: 0; }
+.project-card .proj-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.project-card .proj-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+.tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 99px; margin-top: 6px; background: #E1F5EE; color: #0F6E56; }
+.outcome-box { background: linear-gradient(135deg, #E1F5EE 0%, #E6F1FB 100%); border: 0.5px solid #9FE1CB; border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
+</style>
+
+<div class="roadmap">
+  <h2 class="sr-only">30-day Python learning roadmap for intermediate learners, 30 minutes per day</h2>
+
+  <div class="header-stats">
+    <div class="stat"><div class="stat-num">30</div><div class="stat-label">Days</div></div>
+    <div class="stat"><div class="stat-num">30m</div><div class="stat-label">Daily time</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Weeks</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Projects</div></div>
+  </div>
+
+  <div class="week-tabs">
+    <div class="tab active" onclick="switchWeek(0)">Week 1 — OOP & Modules</div>
+    <div class="tab" onclick="switchWeek(1)">Week 2 — Data & Files</div>
+    <div class="tab" onclick="switchWeek(2)">Week 3 — Libraries & APIs</div>
+    <div class="tab" onclick="switchWeek(3)">Week 4 — Automation & Testing</div>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week-panel active" id="week-0">
+    <div class="milestone-bar">
+      <div class="milestone-label">Week 1 milestone</div>
+      <div class="milestone-text">Build a class-based CLI task manager with multiple modules</div>
+    </div>
+    <div class="section-title">Daily tasks</div>
+    <div class="days-grid">
+      <div class="day-card"><div class="day-num">Day 1</div><div class="day-topic">Classes & objects review</div><div class="day-task">Rewrite a plain function as a class</div></div>
+      <div class="day-card"><div class="day-num">Day 2</div><div class="day-topic">Inheritance & super()</div><div class="day-task">Create subclasses with method overrides</div></div>
+      <div class="day-card"><div class="day-num">Day 3</div><div class="day-topic">Dunder methods</div><div class="day-task">Implement __repr__, __len__, __iter__</div></div>
+      <div class="day-card"><div class="day-num">Day 4</div><div class="day-topic">Properties & decorators</div><div class="day-task">Use @property to control attribute access</div></div>
+      <div class="day-card"><div class="day-num">Day 5</div><div class="day-topic">Modules & packages</div><div class="day-task">Split code into multiple .py files</div></div>
+      <div class="day-card"><div class="day-num">Day 6</div><div class="day-topic">Exceptions & context managers</div><div class="day-task">Custom exception class + with statement</div></div>
+      <div class="day-card"><div class="day-num">Day 7</div><div class="day-topic">Project day</div><div class="day-task">Build task manager CLI with classes</div></div>
+    </div>
+    <div class="two-col">
+      <div class="resource-list">
+        <div class="section-title">Resources</div>
+        <div class="resource-item"><i class="ti ti-book" aria-hidden="true"></i>Real Python — OOP in Python 3</div>
+        <div class="resource-item"><i class="ti ti-video" aria-hidden="true"></i>Corey Schafer OOP series (YouTube)</div>
+        <div class="resource-item"><i class="ti ti-code" aria-hidden="true"></i>Python docs — Data model chapter</div>
+      </div>
+      <div class="project-card">
+        <div class="proj-title"><i class="ti ti-terminal-2" aria-hidden="true" style="font-size:15px; margin-right:5px; color:#1D9E75;"></i>Week project</div>
+        <div class="proj-desc">CLI task manager: add, complete, delete, and list tasks. Stored in a JSON file. Uses 3+ classes across 2 modules.</div>
+        <span class="tag">OOP · Modules · File I/O</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-panel" id="week-1">
+    <div class="milestone-bar">
+      <div class="milestone-label">Week 2 milestone</div>
+      <div class="milestone-text">Read, clean, and analyze a real CSV dataset with pandas</div>
+    </div>
+    <div class="section-title">Daily tasks</div>
+    <div class="days-grid">
+      <div class="day-card"><div class="day-num">Day 8</div><div class="day-topic">File I/O deep dive</div><div class="day-task">Read/write text, CSV, JSON files</div></div>
+      <div class="day-card"><div class="day-num">Day 9</div><div class="day-topic">List comprehensions</div><div class="day-task">Rewrite loops as comprehensions</div></div>
+      <div class="day-card"><div class="day-num">Day 10</div><div class="day-topic">Generators & itertools</div><div class="day-task">Build a generator, use chain & groupby</div></div>
+      <div class="day-card"><div class="day-num">Day 11</div><div class="day-topic">Intro to pandas</div><div class="day-task">Load a CSV, inspect, and filter rows</div></div>
+      <div class="day-card"><div class="day-num">Day 12</div><div class="day-topic">Data cleaning</div><div class="day-task">Handle nulls, rename cols, change dtypes</div></div>
+      <div class="day-card"><div class="day-num">Day 13</div><div class="day-topic">GroupBy & aggregations</div><div class="day-task">groupby + mean/sum/count on real data</div></div>
+      <div class="day-card"><div class="day-num">Day 14</div><div class="day-topic">Project day</div><div class="day-task">Analyze a public dataset, export summary</div></div>
+    </div>
+    <div class="two-col">
+      <div class="resource-list">
+        <div class="section-title">Resources</div>
+        <div class="resource-item"><i class="ti ti-book" aria-hidden="true"></i>Kaggle free pandas course</div>
+        <div class="resource-item"><i class="ti ti-database" aria-hidden="true"></i>pandas docs — Getting started</div>
+        <div class="resource-item"><i class="ti ti-file-spreadsheet" aria-hidden="true"></i>Kaggle datasets (start with Titanic)</div>
+      </div>
+      <div class="project-card">
+        <div class="proj-title"><i class="ti ti-chart-bar" aria-hidden="true" style="font-size:15px; margin-right:5px; color:#1D9E75;"></i>Week project</div>
+        <div class="proj-desc">Analyze a CSV dataset (weather, sales, etc.) — clean nulls, group by category, export a summary report as CSV.</div>
+        <span class="tag">Pandas · File I/O · Generators</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week-panel" id="week-2">
+    <div class="milestone-bar">
+      <div class="milestone-label">Week 3 milestone</div>
+      <div class="milestone-text">Fetch live data from a public API and process it automatically</div>
+    </div>
+    <div class="section-title">Daily tasks</div>
+    <div class="days-grid">
+      <div class="day-card"><div class="day-num">Day 15</div><div class="day-topic">HTTP with requests</div><div class="day-task">GET/POST calls, status codes, headers</div></div>
+      <div class="day-card"><div class="day-num">Day 16</div><div class="day-topic">Working with JSON APIs</div><div class="day-task">Parse response, extract nested data</div></div>
+      <div class="day-card"><div class="day-num">Day 17</div><div class="day-topic">Virtual envs & pip</div><div class="day-task">Create a venv, freeze requirements.txt</div></div>
+      <div class="day-card"><div class="day-num">Day 18</div><div class="day-topic">Environment variables</div><div class="day-task">Use python-dotenv to manage API keys</div></div>
+      <div class="day-card"><div class="day-num">Day 19</div><div class="day-topic">Intro to matplotlib</div><div class="day-task">Line and bar charts from real API data</div></div>
+      <div class="day-card"><div class="day-num">Day 20</div><div class="day-topic">Error handling for APIs</div><div class="day-task">Retry logic, timeouts, 4xx/5xx handling</div></div>
+      <div class="day-card"><div class="day-num">Day 21</div><div class="day-topic">Project day</div><div class="day-task">Weather/stock dashboard from live API</div></div>
+    </div>
+    <div class="two-col">
+      <div class="resource-list">
+        <div class="section-title">Resources</div>
+        <div class="resource-item"><i class="ti ti-book" aria-hidden="true"></i>requests docs — Quickstart</div>
+        <div class="resource-item"><i class="ti ti-cloud" aria-hidden="true"></i>Open-Meteo API (free, no auth needed)</div>
+        <div class="resource-item"><i class="ti ti-chart-line" aria-hidden="true"></i>matplotlib — pyplot tutorial</div>
+      </div>
+      <div class="project-card">
+        <div class="proj-title"><i class="ti ti-cloud-download" aria-hidden="true" style="font-size:15px; margin-right:5px; color:#1D9E75;"></i>Week project</div>
+        <div class="proj-desc">Fetch weather or crypto data from a free API every run, clean it with pandas, and plot a chart saved as a PNG.</div>
+        <span class="tag">requests · API · matplotlib</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week-panel" id="week-3">
+    <div class="milestone-bar">
+      <div class="milestone-label">Week 4 milestone</div>
+      <div class="milestone-text">Automated script with tests, logging, and scheduled execution</div>
+    </div>
+    <div class="section-title">Daily tasks</div>
+    <div class="days-grid">
+      <div class="day-card"><div class="day-num">Day 22</div><div class="day-topic">Intro to pytest</div><div class="day-task">Write 5 unit tests for Week 1 project</div></div>
+      <div class="day-card"><div class="day-num">Day 23</div><div class="day-topic">Mocking & fixtures</div><div class="day-task">Mock an API call in a test</div></div>
+      <div class="day-card"><div class="day-num">Day 24</div><div class="day-topic">Logging module</div><div class="day-task">Replace all print() with proper logging</div></div>
+      <div class="day-card"><div class="day-num">Day 25</div><div class="day-topic">argparse</div><div class="day-task">Add CLI flags to a script</div></div>
+      <div class="day-card"><div class="day-num">Day 26</div><div class="day-topic">Scheduling with schedule</div><div class="day-task">Run a function every 30 min automatically</div></div>
+      <div class="day-card"><div class="day-num">Day 27</div><div class="day-topic">Type hints & mypy</div><div class="day-task">Add type hints to all your functions</div></div>
+      <div class="day-card"><div class="day-num">Day 28–30</div><div class="day-topic">Capstone project</div><div class="day-task">Combine all skills in one polished script</div></div>
+    </div>
+    <div class="two-col">
+      <div class="resource-list">
+        <div class="section-title">Resources</div>
+        <div class="resource-item"><i class="ti ti-test-pipe" aria-hidden="true"></i>pytest docs — Getting started</div>
+        <div class="resource-item"><i class="ti ti-book" aria-hidden="true"></i>Real Python — logging how-to</div>
+        <div class="resource-item"><i class="ti ti-clock" aria-hidden="true"></i>schedule library docs</div>
+      </div>
+      <div class="project-card">
+        <div class="proj-title"><i class="ti ti-robot" aria-hidden="true" style="font-size:15px; margin-right:5px; color:#1D9E75;"></i>Capstone project</div>
+        <div class="proj-desc">Automated daily report: fetches data from an API, processes it with pandas, saves a chart, and emails or logs a summary. Fully tested.</div>
+        <span class="tag">pytest · logging · scheduling</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="outcome-box">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+      <i class="ti ti-trophy" aria-hidden="true" style="font-size:20px; color:#0F6E56;"></i>
+      <span style="font-size:15px; font-weight:500; color:#085041;">Final outcome after 30 days</span>
+    </div>
+    <p style="font-size:14px; color:#0F6E56; line-height:1.6;">You'll have a portfolio of 4 real projects covering OOP, data analysis, API integration, and automated testing. Your code will follow production practices: modular design, type hints, logging, and test coverage — ready to show in a job interview or freelance pitch.</p>
+  </div>
+</div>
+
+<script>
+function switchWeek(idx) {
+  document.querySelectorAll('.week-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+}
+</script>

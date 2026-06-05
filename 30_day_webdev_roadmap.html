@@ -1,0 +1,229 @@
+
+<style>
+:root { --week1: #EEEDFE; --week1t: #3C3489; --week2: #E1F5EE; --week2t: #085041; --week3: #FAEEDA; --week3t: #633806; --week4: #FAECE7; --week4t: #712B13; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.container { padding: 1.5rem 0; }
+.top-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+.stat { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; }
+.stat-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.stat-val { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+.week-tabs { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.tab { padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); transition: all 0.15s; }
+.tab.active { border-color: transparent; }
+.tab[data-w="1"].active { background: var(--week1); color: var(--week1t); }
+.tab[data-w="2"].active { background: var(--week2); color: var(--week2t); }
+.tab[data-w="3"].active { background: var(--week3); color: var(--week3t); }
+.tab[data-w="4"].active { background: var(--week4); color: var(--week4t); }
+.week-panel { display: none; }
+.week-panel.active { display: block; }
+.week-header { border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1rem; }
+.w1 { background: var(--week1); } .w2 { background: var(--week2); } .w3 { background: var(--week3); } .w4 { background: var(--week4); }
+.w1 .wh-title { color: var(--week1t); } .w2 .wh-title { color: var(--week2t); } .w3 .wh-title { color: var(--week3t); } .w4 .wh-title { color: var(--week4t); }
+.wh-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+.wh-sub { font-size: 13px; opacity: 0.75; }
+.section-label { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.days-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 1.25rem; }
+.day-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.75rem; }
+.day-num { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.day-task { font-size: 13px; color: var(--color-text-primary); line-height: 1.4; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+.info-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.875rem 1rem; }
+.info-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.res-list, .proj-list { list-style: none; }
+.res-list li, .proj-list li { font-size: 13px; color: var(--color-text-secondary); padding: 3px 0; display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
+.res-list li::before { content: "→"; flex-shrink: 0; }
+.proj-list li::before { content: "⬡"; flex-shrink: 0; font-size: 10px; margin-top: 2px; }
+.milestone-bar { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.875rem 1rem; margin-bottom: 1.25rem; }
+.milestone-text { font-size: 14px; color: var(--color-text-primary); display: flex; align-items: center; gap: 8px; }
+.milestone-icon { font-size: 18px; }
+.outcome-bar { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; display: flex; align-items: center; gap: 12px; }
+.outcome-icon { font-size: 24px; }
+.outcome-text { font-size: 14px; color: var(--color-text-primary); line-height: 1.6; }
+</style>
+<h2 class="sr-only">30-day web development learning roadmap for a beginner student aiming to get a web dev job</h2>
+<div class="container">
+  <div class="top-stats">
+    <div class="stat"><div class="stat-label">Duration</div><div class="stat-val">30 days</div></div>
+    <div class="stat"><div class="stat-label">Daily time</div><div class="stat-val">3 hrs</div></div>
+    <div class="stat"><div class="stat-label">Projects</div><div class="stat-val">4 builds</div></div>
+    <div class="stat"><div class="stat-label">Goal</div><div class="stat-val">Web dev job</div></div>
+  </div>
+
+  <div class="week-tabs">
+    <div class="tab active" data-w="1" onclick="switchWeek(1)">Week 1 — HTML & CSS</div>
+    <div class="tab" data-w="2" onclick="switchWeek(2)">Week 2 — JS Deep Dive</div>
+    <div class="tab" data-w="3" onclick="switchWeek(3)">Week 3 — React Basics</div>
+    <div class="tab" data-w="4" onclick="switchWeek(4)">Week 4 — Portfolio & Jobs</div>
+  </div>
+
+  <div class="week-panel active" id="w1">
+    <div class="week-header w1">
+      <div class="wh-title">Week 1 — Solidify the foundation</div>
+      <div class="wh-sub">HTML structure + CSS styling — build real pages from day 1</div>
+    </div>
+    <div class="milestone-bar">
+      <div class="milestone-text"><span class="milestone-icon"><i class="ti ti-flag" aria-hidden="true"></i></span> Milestone: Build and deploy a personal webpage from scratch</div>
+    </div>
+    <div class="section-label">Daily tasks</div>
+    <div class="days-grid">
+      <div class="day-card"><div class="day-num">Day 1</div><div class="day-task">HTML basics: tags, structure, semantic elements</div></div>
+      <div class="day-card"><div class="day-num">Day 2</div><div class="day-task">CSS selectors, box model, colors, fonts</div></div>
+      <div class="day-card"><div class="day-num">Day 3</div><div class="day-task">Flexbox layout — build a navbar + hero section</div></div>
+      <div class="day-card"><div class="day-num">Day 4</div><div class="day-task">CSS Grid — build a 3-column card layout</div></div>
+      <div class="day-card"><div class="day-num">Day 5</div><div class="day-task">Responsive design + media queries</div></div>
+      <div class="day-card"><div class="day-num">Day 6</div><div class="day-task">Build: personal webpage (HTML + CSS only)</div></div>
+      <div class="day-card"><div class="day-num">Day 7</div><div class="day-task">Deploy on GitHub Pages + review & polish</div></div>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="info-title"><i class="ti ti-books" aria-hidden="true"></i> Resources</div>
+        <ul class="res-list">
+          <li>The Odin Project (free, project-based)</li>
+          <li>CSS Tricks — Flexbox & Grid guides</li>
+          <li>freeCodeCamp HTML/CSS cert</li>
+          <li>MDN Web Docs for reference</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-title"><i class="ti ti-hammer" aria-hidden="true"></i> Project build</div>
+        <ul class="proj-list">
+          <li>Personal webpage with bio, photo, links</li>
+          <li>Hosted live on GitHub Pages</li>
+          <li>Mobile-responsive layout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-panel" id="w2">
+    <div class="week-header w2">
+      <div class="wh-title">Week 2 — JavaScript deep dive</div>
+      <div class="wh-sub">You already know some JS — now master DOM, events & async</div>
+    </div>
+    <div class="milestone-bar">
+      <div class="milestone-text"><span class="milestone-icon"><i class="ti ti-flag" aria-hidden="true"></i></span> Milestone: Build an interactive to-do app with local storage</div>
+    </div>
+    <div class="section-label">Daily tasks</div>
+    <div class="days-grid">
+      <div class="day-card"><div class="day-num">Day 8</div><div class="day-task">DOM manipulation — querySelector, innerHTML, events</div></div>
+      <div class="day-card"><div class="day-num">Day 9</div><div class="day-task">Arrays, objects, ES6+ (arrow fns, destructuring, spread)</div></div>
+      <div class="day-card"><div class="day-num">Day 10</div><div class="day-task">Fetch API + async/await — call a public API</div></div>
+      <div class="day-card"><div class="day-num">Day 11</div><div class="day-task">Local Storage — persist data in the browser</div></div>
+      <div class="day-card"><div class="day-num">Day 12</div><div class="day-task">Build: interactive to-do list (add, delete, complete)</div></div>
+      <div class="day-card"><div class="day-num">Day 13</div><div class="day-task">Build: weather app using a free weather API</div></div>
+      <div class="day-card"><div class="day-num">Day 14</div><div class="day-task">Code review, refactor, push both projects to GitHub</div></div>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="info-title"><i class="ti ti-books" aria-hidden="true"></i> Resources</div>
+        <ul class="res-list">
+          <li>javascript.info — best free JS book</li>
+          <li>OpenWeatherMap free API</li>
+          <li>Traversy Media JS crash course (YouTube)</li>
+          <li>30 Days of JavaScript (GitHub)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-title"><i class="ti ti-hammer" aria-hidden="true"></i> Project builds</div>
+        <ul class="proj-list">
+          <li>To-do list app with local storage</li>
+          <li>Weather app with live API data</li>
+          <li>Both pushed to GitHub with README</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-panel" id="w3">
+    <div class="week-header w3">
+      <div class="wh-title">Week 3 — React fundamentals</div>
+      <div class="wh-sub">The #1 skill employers look for — components, state, props</div>
+    </div>
+    <div class="milestone-bar">
+      <div class="milestone-text"><span class="milestone-icon"><i class="ti ti-flag" aria-hidden="true"></i></span> Milestone: Build a multi-page React app with routing</div>
+    </div>
+    <div class="section-label">Daily tasks</div>
+    <div class="days-grid">
+      <div class="day-card"><div class="day-num">Day 15</div><div class="day-task">React intro — create-react-app, JSX, components</div></div>
+      <div class="day-card"><div class="day-num">Day 16</div><div class="day-task">Props + state with useState hook</div></div>
+      <div class="day-card"><div class="day-num">Day 17</div><div class="day-task">useEffect — fetch data on load, side effects</div></div>
+      <div class="day-card"><div class="day-num">Day 18</div><div class="day-task">React Router — multi-page navigation</div></div>
+      <div class="day-card"><div class="day-num">Day 19</div><div class="day-task">Tailwind CSS with React — rapid styling</div></div>
+      <div class="day-card"><div class="day-num">Day 20</div><div class="day-task">Build: movie/book search app (API + React)</div></div>
+      <div class="day-card"><div class="day-num">Day 21</div><div class="day-task">Polish, test & deploy on Vercel</div></div>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="info-title"><i class="ti ti-books" aria-hidden="true"></i> Resources</div>
+        <ul class="res-list">
+          <li>React docs — react.dev (official, excellent)</li>
+          <li>Scrimba React course (free tier)</li>
+          <li>TMDB or OMDb free API for the project</li>
+          <li>Vercel for free hosting</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-title"><i class="ti ti-hammer" aria-hidden="true"></i> Project build</div>
+        <ul class="proj-list">
+          <li>Movie/book search app in React</li>
+          <li>Multi-page with React Router</li>
+          <li>Live deployed on Vercel</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-panel" id="w4">
+    <div class="week-header w4">
+      <div class="wh-title">Week 4 — Portfolio & job prep</div>
+      <div class="wh-sub">Put it all together, make it hirable, start applying</div>
+    </div>
+    <div class="milestone-bar">
+      <div class="milestone-text"><span class="milestone-icon"><i class="ti ti-flag" aria-hidden="true"></i></span> Milestone: Live portfolio site + resume + 5 job applications sent</div>
+    </div>
+    <div class="section-label">Daily tasks</div>
+    <div class="days-grid">
+      <div class="day-card"><div class="day-num">Day 22</div><div class="day-task">Build portfolio site in React — home, projects, about, contact</div></div>
+      <div class="day-card"><div class="day-num">Day 23</div><div class="day-task">Add all 3 projects with screenshots, links, descriptions</div></div>
+      <div class="day-card"><div class="day-num">Day 24</div><div class="day-task">Polish GitHub — pinned repos, good READMEs, profile README</div></div>
+      <div class="day-card"><div class="day-num">Day 25</div><div class="day-task">Write a dev-focused resume + LinkedIn update</div></div>
+      <div class="day-card"><div class="day-num">Day 26</div><div class="day-task">Practice 10 common JS interview questions</div></div>
+      <div class="day-card"><div class="day-num">Day 27</div><div class="day-task">Practice 5 React interview questions + live coding</div></div>
+      <div class="day-card"><div class="day-num">Day 28–30</div><div class="day-task">Apply to 5+ jobs, write tailored cover notes, do mock interviews</div></div>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="info-title"><i class="ti ti-books" aria-hidden="true"></i> Resources</div>
+        <ul class="res-list">
+          <li>Frontend Interview Handbook (free)</li>
+          <li>Greatfrontend.com — practice problems</li>
+          <li>LinkedIn Jobs + Wellfound (AngelList)</li>
+          <li>Resume: Reactive Resume (free, open source)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-title"><i class="ti ti-hammer" aria-hidden="true"></i> Final deliverables</div>
+        <ul class="proj-list">
+          <li>Portfolio site live on Vercel</li>
+          <li>3 projects on GitHub with READMEs</li>
+          <li>Resume + LinkedIn ready</li>
+          <li>5 job applications submitted</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="outcome-bar">
+    <div class="outcome-icon"><i class="ti ti-rocket" aria-hidden="true"></i></div>
+    <div class="outcome-text">After 30 days: You'll have a live portfolio, 3 real projects, a polished GitHub, and be actively applying for junior web dev roles — all built on your existing Python/JS base.</div>
+  </div>
+</div>
+<script>
+function switchWeek(n) {
+  document.querySelectorAll('.week-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('w' + n).classList.add('active');
+  document.querySelector('.tab[data-w="' + n + '"]').classList.add('active');
+}
+</script>
